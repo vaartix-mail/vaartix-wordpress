@@ -9,3 +9,4 @@ composer.lock
 phpcs.xml.dist
 README.md
 build
+RELEASING.md

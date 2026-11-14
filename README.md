@@ -8,7 +8,8 @@ through `POST https://api.vaartix.com/emails` instead of PHP `mail()`.
 
 ## Install
 
-1. Download the latest release ZIP and upload it in **Plugins → Add New → Upload Plugin**, or copy
+1. Download [vaartix.zip](https://github.com/vaartix-mail/vaartix-wordpress/releases/latest/download/vaartix.zip)
+   (always the latest release) and upload it in **Plugins → Add New → Upload Plugin**, or copy
    this folder to `wp-content/plugins/vaartix`.
 2. Activate it, then open **Settings → Vaartix**.
 3. Paste a send-only API key from [app.vaartix.com](https://app.vaartix.com), set the From email
