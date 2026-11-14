@@ -1,0 +1,36 @@
+# Attaches vaartix.zip to every GitHub release, so the website can link to
+# https://github.com/vaartix-mail/vaartix-wordpress/releases/latest/download/vaartix.zip
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - name: Check the tag matches the plugin version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          header=$(sed -n 's/^ \* Version: *//p' vaartix.php | tr -d '\r')
+          constant=$(sed -n "s/.*define( 'VAARTIX_PLUGIN_VERSION', '\([^']*\)'.*/\1/p" vaartix.php)
+          stable=$(sed -n 's/^Stable tag: *//p' readme.txt | tr -d '\r')
+          echo "tag=$tag header=$header constant=$constant stable=$stable"
+          [ "$tag" = "$header" ] && [ "$tag" = "$constant" ] && [ "$tag" = "$stable" ]
+      - name: Build plugin ZIP
+        run: |
+          mkdir -p build/vaartix
+          rsync -a --exclude-from=.distignore ./ build/vaartix/
+          cd build && zip -qr vaartix.zip vaartix
+          sha256sum vaartix.zip > vaartix.zip.sha256
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" build/vaartix.zip build/vaartix.zip.sha256 --clobber
