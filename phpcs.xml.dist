@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ruleset name="Vaartix">
+    <description>Security, i18n and PHP-compatibility checks for the Vaartix plugin.</description>
+    <file>vaartix.php</file>
+    <file>uninstall.php</file>
+    <file>includes</file>
+    <arg name="extensions" value="php"/>
+    <arg value="sp"/>
+
+    <config name="testVersion" value="7.4-"/>
+    <config name="minimum_wp_version" value="5.9"/>
+    <config name="text_domain" value="vaartix"/>
+
+    <rule ref="PHPCompatibilityWP"/>
+    <rule ref="WordPress.Security"/>
+    <rule ref="WordPress.WP.I18n"/>
+    <rule ref="WordPress.DB"/>
+    <rule ref="WordPress.PHP.DiscouragedPHPFunctions"/>
+    <rule ref="WordPress.WP.AlternativeFunctions"/>
+    <rule ref="WordPress.PHP.DevelopmentFunctions"/>
+</ruleset>

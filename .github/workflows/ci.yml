@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Lint
+        run: for f in vaartix.php uninstall.php includes/*.php tests/*.php; do php -l "$f"; done
+      - name: Tests
+        run: php tests/run.php
+
+  phpcs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+      - run: composer install --no-interaction --no-progress
+      - run: vendor/bin/phpcs
+
+  package:
+    runs-on: ubuntu-latest
+    needs: [test, phpcs]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build plugin ZIP
+        run: |
+          mkdir -p build/vaartix
+          rsync -a --exclude-from=.distignore ./ build/vaartix/
+          cd build && zip -qr vaartix.zip vaartix
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vaartix-plugin
+          path: build/vaartix.zip
