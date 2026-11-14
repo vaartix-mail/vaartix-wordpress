@@ -78,7 +78,7 @@ final class Vaartix_Mailer {
 
 		Vaartix_Settings::record_success( $sent );
 		/** Fires after an email is sent successfully, as WordPress core does. */
-		do_action( 'wp_mail_succeeded', $mail_data );
+		do_action( 'wp_mail_succeeded', $mail_data ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook, fired as wp_mail() would.
 		return true;
 	}
 
@@ -111,7 +111,7 @@ final class Vaartix_Mailer {
 		$headers      = self::parse_headers( $mail['headers'] );
 		$content_type = isset( $headers['content_type'] ) ? $headers['content_type'] : 'text/plain';
 		/** This filter is documented in wp-includes/pluggable.php. */
-		$content_type = (string) apply_filters( 'wp_mail_content_type', $content_type );
+		$content_type = (string) apply_filters( 'wp_mail_content_type', $content_type ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook, fired as wp_mail() would.
 
 		if ( false !== stripos( $content_type, 'multipart/' ) ) {
 			// The caller built its own MIME body; only PHPMailer can send that unchanged.
@@ -272,8 +272,8 @@ final class Vaartix_Mailer {
 		}
 
 		/** These filters are documented in wp-includes/pluggable.php. */
-		$from_email = (string) apply_filters( 'wp_mail_from', $from_email );
-		$from_name  = (string) apply_filters( 'wp_mail_from_name', $from_name );
+		$from_email = (string) apply_filters( 'wp_mail_from', $from_email ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook, fired as wp_mail() would.
+		$from_name  = (string) apply_filters( 'wp_mail_from_name', $from_name ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook, fired as wp_mail() would.
 
 		if ( $settings['force_from'] && '' !== $settings['from_email'] ) {
 			$from_email = $settings['from_email'];
@@ -369,7 +369,7 @@ final class Vaartix_Mailer {
 			return null;
 		}
 		/** This action is documented in wp-includes/pluggable.php. */
-		do_action( 'wp_mail_failed', new WP_Error( 'wp_mail_failed', $error->get_error_message(), $mail_data ) );
+		do_action( 'wp_mail_failed', new WP_Error( 'wp_mail_failed', $error->get_error_message(), $mail_data ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook, fired as wp_mail() would.
 		return false;
 	}
 }
