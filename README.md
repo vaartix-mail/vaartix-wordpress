@@ -50,4 +50,4 @@ composer install && vendor/bin/phpcs   # WordPress security, i18n and PHP compat
 
 ## License
 
-GPL-2.0-or-later. Vaartix is a product of NAP Designs, Bengaluru.
+GPL-2.0-or-later. Vaartix is a product of SNAP Technologies, Bengaluru.

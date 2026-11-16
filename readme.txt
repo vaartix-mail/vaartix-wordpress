@@ -27,7 +27,7 @@ WordPress sends email with PHP mail() by default, which is often unauthenticated
 
 This plugin connects to the Vaartix API (https://api.vaartix.com) to send your site's emails. Every time WordPress sends an email, the plugin sends the email's sender, recipients, subject, body, headers and attachments to Vaartix, which delivers it. Nothing is sent when the plugin is disabled or has no API key.
 
-Vaartix is operated by NAP Designs, Bengaluru, India. Email data is stored in India (AWS Mumbai).
+Vaartix is operated by SNAP Technologies, Bengaluru, India. Email data is stored in India (AWS Mumbai).
 
 * Terms of Service: https://vaartix.com/terms
 * Privacy Policy: https://vaartix.com/privacy
