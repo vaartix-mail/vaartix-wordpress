@@ -4,7 +4,7 @@ Tags: email, smtp, transactional email, wp_mail, deliverability
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,9 +66,13 @@ Yes, with the vaartix_email_payload filter:
 
 = Does it work with SMTP plugins? =
 
-Use either this plugin or an SMTP plugin, not both. If you prefer SMTP, see https://vaartix.com/docs/guides/wordpress-smtp/.
+Use either this plugin or an SMTP plugin, not both. If you prefer SMTP, see the Vaartix documentation at https://vaartix.com/docs/.
 
 == Changelog ==
+
+= 0.1.1 =
+* Plugin URI now points to the plugin's source repository.
+* Readme: SNAP Technologies, Bengaluru, operates Vaartix; updated documentation link.
 
 = 0.1.0 =
 * First release: wp_mail() through the Vaartix API, settings page, test email, status, fallback and force From.
